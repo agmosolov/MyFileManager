@@ -55,7 +55,6 @@ class DocumentViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        // Создаем или находим imageView
         let imageView: UIImageView
         if let existingImageView = cell.contentView.viewWithTag(1) as? UIImageView {
             imageView = existingImageView
@@ -67,7 +66,6 @@ class DocumentViewController: UITableViewController {
             imageView.translatesAutoresizingMaskIntoConstraints = false
             cell.contentView.addSubview(imageView)
 
-            // Устанавливаем ограничения для imageView
             NSLayoutConstraint.activate([
                 imageView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 10),
                 imageView.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor),
@@ -76,7 +74,6 @@ class DocumentViewController: UITableViewController {
             ])
         }
 
-        // Загружаем изображение
         let fileManager = FileManager.default
         let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileURL = documentsURL.appendingPathComponent(documents[indexPath.row])
@@ -88,10 +85,8 @@ class DocumentViewController: UITableViewController {
             imageView.image = nil
         }
 
-        // Устанавливаем текст для textLabel
         cell.textLabel?.text = documents[indexPath.row]
 
-        // Устанавливаем ограничения для textLabel, чтобы текст был рядом с изображением
         cell.textLabel?.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             cell.textLabel!.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10),
